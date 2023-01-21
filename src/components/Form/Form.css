@@ -1,0 +1,81 @@
+.block__title{
+	font-size: 26px;
+	font-weight: 400;
+	letter-spacing: 2px;
+	margin-bottom: 20px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.block__input{
+	letter-spacing: 1.2px;
+	font-size: 16px;
+	color: rgb(0, 0, 0);
+	border-radius: 10px;
+	border: 0.5px black solid;
+	transition: 0.5s;
+	margin-right: 10px;
+	padding: 10px 20px;
+}
+
+.block__list{
+	border: 0.5px solid black;
+	padding: 10px 10px;
+	border-radius: 10px;
+	letter-spacing: 1.1px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.Todo__block2{
+	display: flex;
+	flex-direction: column;
+}
+
+.block__textarea{
+	letter-spacing: 1.2px;
+	margin-top: 30px;
+	resize: none;
+	padding-bottom: 250px;
+	font-size:16px;
+	height: 100px;
+	width: 495px;
+	overflow:hidden;
+	border-radius: 10px;
+	border: 0.5px black solid;
+	padding: 10px 20px;
+	margin-bottom: 30px;
+}
+
+.block2__button{
+	width: 495px;
+}
+
+.error{
+	border: 1px solid red
+}
+
+.margin{
+	margin-bottom: 10px;
+}
+
+
+
+.current_things{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.Currency{
+	border-radius: 10px;
+	border: 0.5px black solid;
+	padding: 10px 25px;
+}
+
+.Add{
+	border-radius: 10px;
+	border: 0.5px black solid;
+	padding: 10px 25px;
+	margin-bottom: 30px;
+}

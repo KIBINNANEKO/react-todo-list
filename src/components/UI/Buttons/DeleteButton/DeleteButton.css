@@ -1,0 +1,18 @@
+.Delete{
+	position: relative;
+   margin-left: 40px;
+}
+
+.Delete:after {
+   content: ''; 
+   position: absolute;
+   top: 50%;
+   left: -25px;
+   bottom: auto;
+   right: auto;
+   transform: translateY(-50%);
+   -webkit-transform: translateY(-50%);
+   background: url('delete.png') no-repeat ; 
+   width: 32px;
+   height: 32px;
+}

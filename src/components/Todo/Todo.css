@@ -1,0 +1,17 @@
+.Todo{
+	display: flex;
+	justify-content: space-around;
+	gap: 30px
+}
+
+.noPosts{
+	font-size: 24px;
+}
+
+.form{
+	flex: 0 0 48%;
+}
+
+.Todo__block{
+	flex: 0 0 45%;
+}
