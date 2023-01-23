@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import TodoItem from '../TodoItem/TodoItem';
 import Form from '../Form/Form';
 import Modal from '../modals/Modal';
@@ -54,45 +54,82 @@ function Todo() {
 	function done(id){
 		for(let i = 0; i < things.length; i++){
 			if(things[i].id === id){
-				setThings(things[i].isdone = !(things[i].isdone))
-				setThings([...things])
+				if(things[i].isdone === false){
+					currentlyRunning(id, true)
+				}
+				setIsDone(i, true)
 				}
 			}
 		}
 
-	let [currentThings, SetCurrentThings] = useState([])
-
-	function currentlyRunning(id){
-		let temp = things.filter(p => p.id === id)
-
-		if (currentThings[0] === undefined){
-			SetCurrentThings(currentThings = [...currentThings, temp[0]])
-			}
+	function setIsDone(index, isFromDone){
+		if(isFromDone){
+			setThings(()=> {
+				let CopyUpdeteIsDone = things.slice()
+				CopyUpdeteIsDone[index].isdone = !(CopyUpdeteIsDone[index].isdone)
+				return CopyUpdeteIsDone
+			})
+		}
 		else{
-			console.log(2)
-			let copy = false
-			for(let i = 0; i < currentThings.length; i++){
-				if (currentThings[i].title === temp[0].title) copy = true
+			setThings(()=> {
+				let CopyUpdeteIsDone = things.slice()
+				CopyUpdeteIsDone[index].isdone = true
+				return CopyUpdeteIsDone
+			})
+		}
+	}
+
+	let [currentThings, setCurrentThings] = useState([])
+
+	function currentlyRunning(id, isFromDone){
+
+		 // Дело на которое кликнули
+		let clickedThing = (things.filter(thing => thing.id === id))[0]
+
+		// Если дело на которое кликнули выполнено то оно будет пропадать из списка выполняющихся
+		if(clickedThing.isdone === true){
+			setCurrentThings(currentThings.filter(thing => thing.id !== clickedThing.id))
+		}
+		else{
+
+			// Если список "Выполняется" пуст, добавим первый элемент
+			if (currentThings === [] && isFromDone !== true) {
+					setCurrentThings([...currentThings, clickedThing])
 			}
-			if(copy){
-				console.log('Nothing')
-				for(let j = 0; j < things.length; j++){
-					if (temp[0].id === things[j].id){
-						setThings((things) => {
-							return things[j].isdone = true
-						})
-						setThings([...things])
-					}
-				}
-				
-			}
+
+			// В ином случае делаем проверку, есть ли уже в списке элемент, на который кликнули
 			else{
-				SetCurrentThings(currentThings = [...currentThings, temp[0]])
-			}
+				let copy = false
+
+				for(let i = 0; i < currentThings.length; i++){
+					if (currentThings[i].title === clickedThing.title) copy = true
+				}
+
+				// Если есть, то убираем его из списка и отмечаем как выполненное
+				if(copy || isFromDone){
+					for(let j = 0; j < things.length; j++){
+						if (clickedThing.id === things[j].id){
+							if(isFromDone){
+								setCurrentThings(currentThings.filter(thing => thing.id !== things[j].id))
+							}
+							else{
+								setIsDone(j, false)
+								setCurrentThings(currentThings.filter(thing => thing.id !== things[j].id))
+							}
+							
+						}
+					}
+				
+				}
+
+				// Если нет, то просто добавляем его в список
+				else{
+					setCurrentThings([...currentThings, clickedThing])
+				}
 			
+			}
 		}
 
-		console.log(currentThings)
 	}
 
   return (
@@ -102,7 +139,7 @@ function Todo() {
 			 ? 
 			<h2 className='noPosts'>Нет заданий</h2>
 			 :
-			things.sort((x, y) => x.priority - y.priority).reverse().map(thing => {
+			things.sort((x, y) => y.priority - x.priority).map(thing => {
 			return(
 			<TodoItem 
 			create = {createPost}
@@ -121,7 +158,7 @@ function Todo() {
 		</div>
 		<Form current_things={currentThings} className="form" create={createPost} sort={sorting}></Form>
 		<div>
-			<Modal stle={`${things.every(item => item.isdone === true) ? 'show' : ''}`}></Modal>
+			<Modal stle={`${(things.every(item => item.isdone === true) && things.length !== 0) ? 'show' : ''}`}></Modal>
 		</div>
     </div>
   );

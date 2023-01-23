@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div className='main'>
-      <h1 className='title'> ~ Todo List ✨</h1>
+      <h1 className='title'> Todo<span>List</span></h1>
       <Todo/>
     </div>
   );

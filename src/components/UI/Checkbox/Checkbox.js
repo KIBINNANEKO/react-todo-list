@@ -4,7 +4,7 @@ import './Checkbox.css';
 function Checkbox(props) {
 
   return (
-		<input {...props} type="checkbox"></input>
+		<div className='Checkbox' {...props} ></div>
   );
 }
 

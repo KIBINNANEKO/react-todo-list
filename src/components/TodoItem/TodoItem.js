@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './TodoItem.css';
-import Input from '../UI/Checkbox/Checkbox'
+import Checkbox from '../UI/Checkbox/Checkbox'
 import DeleteButton from '../UI/Buttons/DeleteButton/DeleteButton';
 
 function TodoItem(props) {
@@ -34,7 +34,7 @@ function TodoItem(props) {
 			)}
 		</div>
 		<div className='TodoItem__buttonBlock'>
-			<Input className='TodoItem__input' defaultChecked = {isTrue} onChange={() => props.done()}/>
+			<Checkbox className={props.isdone ? 'Checkbox Checkbox__active' : 'Checkbox Checkbox__empty'} onClick={() => props.done()}/>
 			<DeleteButton onClick={() => props.delete(props.post)}></DeleteButton>
 		</div>
     </div>

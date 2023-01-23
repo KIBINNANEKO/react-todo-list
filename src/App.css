@@ -29,15 +29,19 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
 
 .title{
   font-size: 50px;
-  font-weight: 300;
-  font-style: italic;
+  font-weight: 700;
   color: black;
   text-align: center;
   margin-bottom: 60px;
   margin-top: 40px;
   transition: all 1s ease-in-out;
+  letter-spacing: 2px;
 }
 
 .title:hover{
   color: orange
+}
+
+.title span{
+  color:rgba(51, 106, 206, 1)
 }

@@ -4,14 +4,10 @@
 }
 
 .Delete:after {
-   content: ''; 
    position: absolute;
-   top: 50%;
-   left: -25px;
-   bottom: auto;
-   right: auto;
-   transform: translateY(-50%);
-   -webkit-transform: translateY(-50%);
+   content: ''; 
+	top: 36%;
+	right: 30%;
    background: url('delete.png') no-repeat ; 
    width: 32px;
    height: 32px;
