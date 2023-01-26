@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import TodoItem from '../TodoItem/TodoItem';
 import Form from '../Form/Form';
-import Modal from '../modals/Modal';
+import Modal from '../Modal/Modal';
 import './Todo.css'
 
 function Todo() {

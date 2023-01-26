@@ -6,11 +6,10 @@ function Modal(props) {
   return (
 		<div {...props} className={`overlay animated ${props.stle}`}>
         <div className="modal">
-			<h3>
-				Ты молодец!!!
-			</h3>
+          <img src={require('./Nice.jpg')} alt="Nice"/>
+			    <h3>You did everything you planned for today! Well done!</h3>
         </div>
-      </div>
+    </div>
   );
 }
 
