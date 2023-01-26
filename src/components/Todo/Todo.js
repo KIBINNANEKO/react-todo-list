@@ -39,10 +39,6 @@ function Todo() {
 	 id: 4 
 	}])
 
-	function sorting(){
-		setThings([...things.sort((x, y) => x.priority - y.priority).reverse()])
-	}
-
 	function createPost(newPost){
 		setThings([...things, newPost])
 	}
@@ -131,11 +127,11 @@ function Todo() {
 			create = {createPost}
 			delete={deletePost}
 			currentlyRunning={currentlyRunning}
+			done = {done}
 			key = {thing.id} 
 			title = {thing.title} 
 			description = {thing.description} 
 			isdone = {thing.isdone} 
-			done = {done}
 			priority={thing.priority} 
 			post={thing} 
 			>
@@ -143,7 +139,7 @@ function Todo() {
 			}
 			
 		</div>
-		<Form current_things={currentThings} className="form" create={createPost} sort={sorting} done={done}></Form>
+		<Form current_things={currentThings} className="form" create={createPost} done={done}></Form>
 		<div>
 			<Modal stle={`${(things.every(item => item.isdone === true) && things.length !== 0) ? 'show' : ''}`}></Modal>
 		</div>

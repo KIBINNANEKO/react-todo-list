@@ -10,7 +10,6 @@ function Timer() {
 	function startTimer(){
 		clearInterval(interval)
 		setTime(() => {
-			console.log(1)
 			let copyTime = {...time}
 			copyTime.seconds += 1
 			return copyTime

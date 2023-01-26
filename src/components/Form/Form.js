@@ -55,7 +55,6 @@ function Form(props) {
 				<div className='Todo__block2'>
 					<textarea className='block__textarea' name="textComment" placeholder='Описание' value={inputDescription.value} onChange={inputDescription.onChange}></textarea>
 					<Button className="Button margin" onClick={add} value='Добавить'></Button>
-					{/* <Button onClick={sort} value='Сортировать'>Сортировать</Button> */}
 				</div>
 			</div>
 			<div className='Currency'>
