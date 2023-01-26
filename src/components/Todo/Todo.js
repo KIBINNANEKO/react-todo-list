@@ -26,7 +26,7 @@ function Todo() {
 	 priority: 2,
 	 id: 2 
 	}, 
-	{title: "Поесть",
+	{title: "Покушать",
 	 description: "Сварить грибной суп и пообедать.",
 	 isdone: false,
 	 priority: 3,
