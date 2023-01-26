@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './Form.css';
 import Button from '../UI/Buttons/Button/Button';
 import useInput from '../../hooks/useInput';
@@ -7,31 +7,31 @@ import CurrentlyTodoItem from '../CurrentlyTodoItem/CurrentlyTodoItem';
 function Form(props) {
 
 		function add(event){
-		event.preventDefault()
+			event.preventDefault()
 
-		const titleInput = document.querySelector('.block__input')
-		const priorityList = document.querySelector('.block__list')
+			const titleInput = document.querySelector('.block__input')
+			const priorityList = document.querySelector('.block__list')
 
-		if(inputTitle.value.length <= 3 || inputPriority.value === ''){
-			titleInput.classList.add('error')
-			priorityList.classList.add('error')
-		}
-
-		else{
-			const newPost = {
-			id: Date.now(),
-			title: inputTitle.value,
-			description: inputDescription.value,
-			isdone: false,
-			priority: parseInt(inputPriority.value)
+			if(inputTitle.value.length <= 3 || inputPriority.value === ''){
+				titleInput.classList.add('error')
+				priorityList.classList.add('error')
 			}
 
-			props.create(newPost)
-			priorityList.classList.remove('error')
-			titleInput.classList.remove('error')
-			inputTitle.clear()
-			inputDescription.clear()
-		}
+			else{
+				const newPost = {
+				id: Date.now(),
+				title: inputTitle.value,
+				description: inputDescription.value,
+				isdone: false,
+				priority: parseInt(inputPriority.value)
+				}
+
+				props.create(newPost)
+				priorityList.classList.remove('error')
+				titleInput.classList.remove('error')
+				inputTitle.clear()
+				inputDescription.clear()
+			}
 
 	}
 
@@ -46,10 +46,10 @@ function Form(props) {
 				<div>
 					<input className='block__input' placeholder='Название' type="text" value={inputTitle.value} onChange={inputTitle.onChange}></input>
 					<select className='block__list' value={inputPriority.value} onChange={inputPriority.onChange}>
-						<option value='0'>Выберите приоритет</option>
-						<option value='3'>Срочное</option>
-						<option value='2'>Важное</option>
-						<option value='1'>Не обязательное</option>
+						<option value={0}>Выберите приоритет</option>
+						<option value={3}>Срочное</option>
+						<option value={2}>Важное</option>
+						<option value={1}>Не обязательное</option>
 					</select>
 				</div>
 				<div className='Todo__block2'>
@@ -66,8 +66,10 @@ function Form(props) {
 					{props.current_things.map(thing => {
 						return(
 						<CurrentlyTodoItem 
+						done={props.done}
 						className='TodoItem current'
 						key = {thing.id} 
+						id = {thing.id}
 						title = {thing.title} 
 						description = {thing.description} 
 						isdone = {thing.isdone}>

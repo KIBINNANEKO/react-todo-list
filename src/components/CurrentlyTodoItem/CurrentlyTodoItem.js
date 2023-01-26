@@ -1,19 +1,19 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './CurrentlyTodoItem.css';
-import Input from '../UI/Checkbox/Checkbox'
-import DeleteButton from '../UI/Buttons/DeleteButton/DeleteButton';
+import Timer from '../Timer/Timer';
+import Checkbox from '../UI/Checkbox/Checkbox';
 
 function TodoItem(props) {
 
   return (
     <div className='TodoItem'>
 		<div className='TodoItem__textBlock'>
-			<p className='textBlock__title' onClick={() => props.currentlyRunning(props.post.id)}>{props.title}</p>
+			<p className='currently__title'>{props.title}</p>
 			<p className='textBlock__description'>{props.description}</p>
-			
+			<Timer/>
 		</div>
 		<div className='TodoItem__buttonBlock'>
-			<button>x</button>
+			<Checkbox className='Checkbox Checkbox__empty' onClick={() => props.done(props.id)}></Checkbox>
 		</div>
     </div>
   );

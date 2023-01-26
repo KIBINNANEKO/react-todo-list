@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import TodoItem from '../TodoItem/TodoItem';
 import Form from '../Form/Form';
 import Modal from '../modals/Modal';
@@ -57,32 +57,23 @@ function Todo() {
 				if(things[i].isdone === false){
 					currentlyRunning(id, true)
 				}
-				setIsDone(i, true)
+				things[i].isdone = !(things[i].isdone)
+				setThings([...things])
 				}
 			}
 		}
 
-	function setIsDone(index, isFromDone){
-		if(isFromDone){
-			setThings(()=> {
-				let CopyUpdeteIsDone = things.slice()
-				CopyUpdeteIsDone[index].isdone = !(CopyUpdeteIsDone[index].isdone)
-				return CopyUpdeteIsDone
-			})
-		}
-		else{
-			setThings(()=> {
-				let CopyUpdeteIsDone = things.slice()
-				CopyUpdeteIsDone[index].isdone = true
-				return CopyUpdeteIsDone
-			})
-		}
+	function setIsDone(index){
+		setThings(()=> {
+			let CopyUpdeteIsDone = things.slice()
+			CopyUpdeteIsDone[index].isdone = true
+			return CopyUpdeteIsDone
+		})
 	}
 
 	let [currentThings, setCurrentThings] = useState([])
 
 	function currentlyRunning(id, isFromDone){
-
 		 // Дело на которое кликнули
 		let clickedThing = (things.filter(thing => thing.id === id))[0]
 
@@ -96,8 +87,6 @@ function Todo() {
 			if (currentThings === [] && isFromDone !== true) {
 					setCurrentThings([...currentThings, clickedThing])
 			}
-
-			// В ином случае делаем проверку, есть ли уже в списке элемент, на который кликнули
 			else{
 				let copy = false
 
@@ -105,7 +94,6 @@ function Todo() {
 					if (currentThings[i].title === clickedThing.title) copy = true
 				}
 
-				// Если есть, то убираем его из списка и отмечаем как выполненное
 				if(copy || isFromDone){
 					for(let j = 0; j < things.length; j++){
 						if (clickedThing.id === things[j].id){
@@ -113,7 +101,7 @@ function Todo() {
 								setCurrentThings(currentThings.filter(thing => thing.id !== things[j].id))
 							}
 							else{
-								setIsDone(j, false)
+								setIsDone(j)
 								setCurrentThings(currentThings.filter(thing => thing.id !== things[j].id))
 							}
 							
@@ -121,8 +109,6 @@ function Todo() {
 					}
 				
 				}
-
-				// Если нет, то просто добавляем его в список
 				else{
 					setCurrentThings([...currentThings, clickedThing])
 				}
@@ -143,20 +129,21 @@ function Todo() {
 			return(
 			<TodoItem 
 			create = {createPost}
+			delete={deletePost}
+			currentlyRunning={currentlyRunning}
 			key = {thing.id} 
 			title = {thing.title} 
 			description = {thing.description} 
 			isdone = {thing.isdone} 
-			done = {() => {done(thing.id)}}
+			done = {done}
 			priority={thing.priority} 
 			post={thing} 
-			delete={deletePost}
-			currentlyRunning={currentlyRunning}>
+			>
 			</TodoItem>)})
 			}
 			
 		</div>
-		<Form current_things={currentThings} className="form" create={createPost} sort={sorting}></Form>
+		<Form current_things={currentThings} className="form" create={createPost} sort={sorting} done={done}></Form>
 		<div>
 			<Modal stle={`${(things.every(item => item.isdone === true) && things.length !== 0) ? 'show' : ''}`}></Modal>
 		</div>

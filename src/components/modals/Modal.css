@@ -41,7 +41,7 @@
 	}
 
 .overlay.animated.show.modal{
-	opacity: 1;
+	 opacity: 1;
    visibility: visible;
    transform: translate(-50%, -50%);
 }
